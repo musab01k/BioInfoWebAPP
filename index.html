@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Circular Codes</title>
+  <link rel="stylesheet" href="https://unpkg.com/modern-css-reset/dist/reset.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.28.1/cytoscape.min.js"></script>
+</head>
+<body>
+  <div id="graphWrapper">
+    <div id="graph"></div>
+    
+    <div id="loadingOverlay" style="display: none;">
+      <div class="loadingSpinner"></div>
+      <p>Calculating layout...</p>
+    </div>
+    <button id="openSidebarBtn" class="floating-btn">+</button>
+  </div>
+
+  <div id="graphNavControls" style="display: none;">
+    <button id="prevBtn">&lt; Previous</button>
+    <span id="navStatus"></span>
+    <button id="nextBtn">Next &gt;</button>
+  </div>
+
+  <div id="graphControls" style="position: absolute; top: 12px; right: 12px; display: flex; gap: 8px; z-index: 25;">
+    <button id="downloadBtn">Download</button>
+    <button id="fitBtn">Fit Graph</button>
+  </div>
+
+  
+  <div id="searchControls">
+    <input type="text" id="searchInput" placeholder="Search vertex...">
+    <button id="searchBtn">Search</button>
+  </div>
+
+  <div id="zoomControls">
+    <button id="fullscreenBtn">⛶</button>
+    <button id="zoomInBtn">+</button>
+    <button id="zoomOutBtn">−</button>
+  </div>
+
+  <aside id="sidebar" class="overlay sidebar">
+    <button id="sidebarToggle" class="toggle-handle"><</button>
+    
+    <div class="card">
+
+      <img src="helix_codeTransparent.png" alt="HelixCode Logo" id="sidebar-logo">
+
+      <label for="words" class="label">Code Words</label>
+      <textarea id="words" placeholder="One code set per line, words separated by spaces..."></textarea>
+
+      <div class="divider">or</div>
+
+      <label for="file" class="label">Import from File</label>
+      <input type="file" id="file" accept="text/plain" />
+
+      <h3 class="section-title">Options</h3>
+      <div class="options">
+        <label><input type="checkbox" id="ignoreCase" /> Ignore case</label>
+      </div>
+
+      <button id="processBtn" class="action-btn">
+        Execute
+        <span style="display:block; font-size:9px; color:#dddd; margin-top:-1mm;">ctrl+enter</span>
+      </button>
+
+      </div>
+
+    <div class="group-credits">
+      <p><strong>Created by:</strong></p>
+      <p>
+        Hashemi, Olejniczak, Grivel ,<br>
+        Hitchon, Chahbaoui, Karatas
+      </p>
+    </div>
+
+  </aside>
+
+
+  <section id="resultsBar" class="overlay bottom-bar">
+    <button id="resultsToggle" class="toggle-handle">^</button>
+    <div class="card">
+      <div id="meta" class="meta"></div>
+      <div id="status" class="meta"></div>
+
+      <hr />
+
+      <div id="duplicatesWarning" class="warning-box" style="display:none;"></div>
+
+      <div id="verdictBox">
+        <h3 id="resultTitle"></h3>
+        <p id="resultDesc"></p>
+      </div>
+
+      <div id="graphInfoSection" style="display:none; margin-top:12px">
+        <div class="badge">Vertices</div>
+        <div id="vertexList" class="paths"></div>
+      </div>
+
+      <div id="longestSection" style="display:none; margin-top:12px">
+        <div class="badge">Longest path(s)</div>
+        <div id="longestLen" class="small"></div>
+        <div id="paths" class="paths"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <div id="overlayMask"></div>
+
+  <div id="downloadModal" class="modal">
+    <div class="modal-content">
+      <div class="download-options">
+        <button class="download-option" data-type="png">PNG</button>
+        <button class="download-option" data-type="json">JSON</button>
+      </div>
+      <button id="closeDownloadModal" class="close-btn">Cancel</button>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
